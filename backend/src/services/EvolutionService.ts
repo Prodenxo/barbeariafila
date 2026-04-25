@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const EVOLUTION_URL = process.env.EVOLUTION_API_URL;
-const GLOBAL_TOKEN = process.env.EVOLUTION_API_KEY;
+const GLOBAL_TOKEN = process.env.EVOLUTION_API_TOKEN;
 
 export class EvolutionService {
   /**
