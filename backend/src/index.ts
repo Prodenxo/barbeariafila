@@ -1,22 +1,19 @@
 import express from 'express';
-import morgan from 'morgan';
-import dotenv from 'dotenv';
+import cors from 'cors';
 import webhookRoutes from './routes/webhook';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
 
-// Routes
-app.use('/webhook', webhookRoutes);
-
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+// Rota de Health Check (para o Easypanel saber que o app está online)
+app.get('/', (req, res) => {
+  res.send('🚀 BarberQueue Backend is up and running!');
 });
+
+app.use('/webhook', webhookRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 BarberQueue Backend running on port ${PORT}`);
